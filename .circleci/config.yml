@@ -5,8 +5,8 @@ jobs:
   build:
     working_directory: ~/Sprint-3/src
     docker:
-      -image:cimg/node:lts
+      - image: cimg/node:lts
     steps:
-      -checkout:
-        path: ~/project/
-      -run: npm install
+      - checkout:
+         path: ~/project/
+      - run: npm install
