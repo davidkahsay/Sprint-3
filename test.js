@@ -33,7 +33,7 @@ app.get("/ping", (req, res) => {
       console.error(err);
       return res.status(500).send("This entry was not able to be added");
     }
-    console.log(`Added city with ID ${result.insertId}`);
+    console.log(`Added city`);
     return res.send("Your entry has been added");
   });
 });
