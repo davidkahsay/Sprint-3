@@ -9,4 +9,3 @@ jobs:
     steps:
       - checkout:
          path: ~/project/
-      - run: npm install
