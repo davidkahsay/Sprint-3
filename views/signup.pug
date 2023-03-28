@@ -1,0 +1,24 @@
+extends layout
+
+block head
+  link(rel="stylesheet", href="/login.css")
+  block content
+    title Signup
+    meta(charset='UTF-8')
+ 
+  body
+    #main
+     form(action="#")
+       div.label Signup with your organisation email
+       div.username
+        input(type="text" placeholder="Enter organisation email")
+       div.password
+        input(type="password" placeholder="Password")
+       div.checkbox
+        input(type='checkbox' name='agreement' checked)
+        |Remember me
+       button(type="button") Signup!
+      
+       p
+        | 
+       
