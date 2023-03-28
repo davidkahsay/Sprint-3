@@ -26,9 +26,9 @@ app.get("/ping", (req, res) => {
 
  // Adds a new city to the database
  app.post("/cities/add", (req, res) => {
-  const { name, countryCode, population } = req.body;
-  const query = "INSERT INTO `city` (`Name`, `CountryCode`, `Population`) VALUES (?, ?, ?)";
-  db.execute(query, [name, countryCode, population], (err, result) => {
+  const { name, population } = req.body;
+  const query = "INSERT INTO `city` (`Name`, `Population`) VALUES (?, ?)";
+  db.execute(query, [name, population], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).send("This entry was not able to be added");
