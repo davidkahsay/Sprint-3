@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@4.7.0
 jobs:
   build:
-    working_directory: ~/project/src
+    working_directory: ~/Sprint-3/src
     docker:
       -image:cimg/node:lts
     steps:
