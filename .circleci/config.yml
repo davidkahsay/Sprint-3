@@ -9,4 +9,4 @@ jobs:
     steps:
       - checkout:
          path: ~/project/
-      - run: docker compose up -d --build 
+      - run: docker compose up
