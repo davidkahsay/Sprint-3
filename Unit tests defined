@@ -1,0 +1,7 @@
+Unit Tests:
+
+Test the database connection to ensure that the backend can successfully connect to the database and read and write data.
+Test individual database queries to ensure that they are returning the correct data.
+Test any data validation functions to ensure that they are working as expected.
+Test any authorization functions to ensure that users can only access data that they are authorized to access.
+Test any endpoints to ensure that they are properly handling requests and returning the correct data.
