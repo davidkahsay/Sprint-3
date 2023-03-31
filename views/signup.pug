@@ -1,14 +1,17 @@
-extends layout
+.layout
+      .layout-nav
+        include mixins/nav
+        +navigation()
 
 block head
   link(rel="stylesheet", href="/login.css")
+  
   block content
     title Signup
-    meta(charset='UTF-8')
- 
+
   body
-    #main
-     form(action="#")
+    
+     form
        div.label Signup with your organisation email
        div.username
         input(type="text" placeholder="Enter organisation email")
@@ -16,7 +19,7 @@ block head
         input(type="password" placeholder="Password")
        div.checkbox
         input(type='checkbox' name='agreement' checked)
-        |Remember me
+        |Remember details
        button(type="button") Signup!
       
        p
