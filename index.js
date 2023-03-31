@@ -8,10 +8,10 @@ const port = 3000;
 
 
 app.set("view engine", "pug");
-
+/*this will introduce to pug*/
 // Serve assets from 'static' folder
 app.use(express.static("static"));
-
+/*This allows files and images to run on web application*/
 
 /* Landing route */
 app.get("/", (req, res) => {
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-/* Setup database connection */
+/* Setup database connection by using mysql.createConnection */
 const db = await mysql.createConnection({
   host: process.env.DATABASE_HOST || "localhost",
   user: "user",
@@ -32,7 +32,7 @@ const db = await mysql.createConnection({
   database: "world",
 });
 
-
+/*This code shows how we set up the route for a page in a web application.
 // Gallery route
 app.get("/gallery", (req, res) => {
   res.render("gallery");
@@ -53,7 +53,7 @@ app.get("/contactus", (req, res) => {
   res.render("contactus");
 });
 
-
+/*In this code we are tetrieveing data from the database and adding it to the web application*/
 // Returns an array of cities from the database
 app.get("/cities", async (req, res) => {
   const [rows, fields] = await db.execute("SELECT * FROM `city`");
@@ -96,7 +96,7 @@ app.post("/cities/add", (req, res) => {
     return res.send("Your entry has been added");
   });
 });
-
+/*in this code we have set up a route inthe web application by adding cities to the database*/
 // Run server!
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
