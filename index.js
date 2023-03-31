@@ -12,8 +12,6 @@ app.set("view engine", "pug");
 // Serve assets from 'static' folder
 app.use(express.static("static"));
 
-//const db = await DatabaseService.connect();
-//const { conn } = db;
 
 /* Landing route */
 app.get("/", (req, res) => {
@@ -40,27 +38,27 @@ app.get("/gallery", (req, res) => {
   res.render("gallery");
 });
 
-// About route
+// login route
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
-// About route
+// signup route
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
-// About route
+// contact us route
 
 app.get("/contactus", (req, res) => {
   res.render("contactus");
 });
 
-// Returns an array of cities from the database
+
 // Returns an array of cities from the database
 app.get("/cities", async (req, res) => {
   const [rows, fields] = await db.execute("SELECT * FROM `city`");
   return res.render("cities",{rows,fields});
-  //return res.send(rows);
+  
 });
 
 
@@ -70,16 +68,14 @@ app.get('/cities/:id', async (req, res) => {
   return res.render('city', { city });
 })
 
+
 // Returns JSON array of cities
 app.get("/api/cities", async (req, res) => {
   const [rows, fields] = await db.getCities();
   return res.send(rows);
 });
 
-// Sample API route
-app.get("/ping", (req, res) => {
-  res.send("pong");
-});
+
 
 // Returns an array of cities from the database
 app.get("/cities", async (req, res) => {
@@ -87,7 +83,19 @@ app.get("/cities", async (req, res) => {
   return res.send(rows);
 });
 
-
+// Adds a new city to the database
+app.post("/cities/add", (req, res) => {
+  const { name, population } = req.body;
+  const query = "INSERT INTO `city` (`Name`, `Population`) VALUES (?, ?)";
+  db.execute(query, [name, population], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("This entry was not able to be added");
+    }
+    console.log(`Added city`);
+    return res.send("Your entry has been added");
+  });
+});
 
 // Run server!
 app.listen(port, () => {
