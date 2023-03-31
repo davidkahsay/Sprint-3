@@ -18,7 +18,7 @@ const db = mysql.createConnection({
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
-
+/*This code just verify if the code is running or not*/
 // Sample API route
 app.get("/ping", (req, res) => {
   res.send("pong");
