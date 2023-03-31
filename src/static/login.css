@@ -1,0 +1,93 @@
+
+html,
+body
+
+{
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #eeeeee;
+  margin: 0;
+  padding: 0;
+}
+  
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+  
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0rem;
+}
+
+nav b {
+  font-size: large;
+}
+
+nav a {
+  color: #181818;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: cornflowerblue;
+}
+  
+  form {
+    background-color: rgba(115, 144, 170, 0.841);
+    width: 40%;
+    padding: 30px;
+  }
+ 
+  button {
+    background: #d4d8d8;
+    color: #fff;
+    border: 0px;
+    width: 80%;
+    padding: 10px;
+    margin: 5px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .login {
+    color: #fff;
+    padding-bottom: 10px;
+  }
+  .checkbox {
+    color: #fff;
+    padding-bottom: 10px;
+  }
+  
+
+
+  a {
+    
+    padding-left: 5px;
+    padding-top: 1.5rem;
+    text-decoration: none;
+    color: #181818;
+    text-transform: capitalize;
+  }
+  
+  .layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0rem 3rem;
+  }
+  .layout-content {
+    padding-top: 1.5rem;
+  }
+  
+  
+  
+
+  
+  

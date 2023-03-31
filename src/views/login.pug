@@ -1,0 +1,41 @@
+.layout
+      .layout-nav
+        include mixins/nav
+        +navigation()
+block head
+  link(rel="stylesheet", href="/login.css")
+  
+  block content
+
+  body
+    
+    form
+      div.label Student login 
+      div.username
+      input(type="text" placeholder="email")
+      div.password
+      input(type="password" placeholder="password")
+      div.checkbox
+      input(type='checkbox' name='agreement' checked)
+      |Remember details
+      button(type="button") login
+    
+      
+  
+
+  form
+    div.label Staff login 
+    div.username
+    input(type="text" placeholder="email")
+    div.password
+    input(type="password" placeholder="password")
+    div.checkbox
+    input(type='checkbox' name='agreement' checked)
+    |Remember details
+    button(type="button") login
+    
+  p
+      
+      | Not signed up?
+      a(href="/signup") Sign up here
+  
