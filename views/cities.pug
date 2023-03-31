@@ -1,5 +1,5 @@
 extends layout.pug
-
+//this 'block content' section main containns of the tempelates.
 block head
   link(rel="stylesheet", href="/cities.css")
 
@@ -18,4 +18,4 @@ block content
           - const population = new Intl.NumberFormat().format(row.Population);
           td.fit.number #{population}
         
-
+//this table makes cities with their country codes and population which can be labled using the cities.css file
