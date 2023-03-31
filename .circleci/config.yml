@@ -5,9 +5,9 @@ jobs:
   build:
     working_directory: ~/Sprint-3
     docker:
-      -image:cimg/node:18.15.0
+      - image: circleci/node:18.15.0
     steps:
-      -checkout:
-        path: ~/Sprint-3/
-      -run: npm install
-      -run: npm test
+      - checkout:
+         path: ~/Sprint-3/
+      - run: npm install
+      - run: npm test
