@@ -3,7 +3,7 @@
   }
   
   table {
-    border: 1px solid var(--clr-table); //eieibf
+    border: 1px solid var(--clr-table); 
     border-collapse: collapse;
     width: 100%;
   }
