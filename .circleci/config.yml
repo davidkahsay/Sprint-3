@@ -1,0 +1,13 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.7.0
+jobs:
+  build:
+    working_directory: ~/Sprint-3
+    docker:
+      -image:cimg/node:18.15.0
+    steps:
+      -checkout:
+        path: ~/project/
+      -run: npm install
+      -run: npm test
