@@ -27,7 +27,7 @@ app.get("/country-report", function(req, res) {
         output+= '</table>';
         res.send(output);
     });
-});
+});//
 
 
 // Create a dynamic route for /hello/<name>, where name is any value provided by user
