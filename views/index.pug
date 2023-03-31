@@ -1,0 +1,8 @@
+extends layout.pug 
+
+block content   
+    h2 Welcome
+
+    .gallery 
+        each idx in Array.from(Array(1).keys())
+            img.gallery-img(src=`https://source.unsplash.com/random/${idx}`, alt="")
