@@ -1,7 +1,7 @@
 
 html,
 body
-
+/*this will set the font size to 14 pixel, both margin and padding are elements to 0 so it removes all the default paddding and margin*/
 {
   font-size: 14px;
   font-family: "Segoe UI", sans-serif;
@@ -10,13 +10,13 @@ body
   padding: 0;
 }
   
-
+/*the border box means the elemenent are the total height ad width are calculated.This is dne by calaculating padding and border dimensions*/
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-  
+/* the nav element helps the layout for a menu or navigation bar*/  
 nav {
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ nav a {
 nav a:hover {
   color: cornflowerblue;
 }
-  
+/*the 'form' element on the page have a blue background colour. This means it will take 40% of the width of its containing elements*/  
   form {
     background-color: rgba(115, 144, 170, 0.841);
     width: 40%;
