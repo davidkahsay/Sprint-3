@@ -2,7 +2,8 @@ extends layout.pug
 
 block content   
     h2 Welcome
-
+    p
+        |“The study of geography is about more than just memorizing places on a map. It’s about understanding the complexity of our world, appreciating the diversity of cultures that exists across continents. And in the end, it’s about using all that knowledge to help bridge divides and bring people together.” –President Barack Obama
     .gallery 
         each idx in Array.from(Array(1).keys())
             img.gallery-img(src=`https://source.unsplash.com/random/${idx}`, alt="")
