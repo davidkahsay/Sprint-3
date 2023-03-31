@@ -1,0 +1,83 @@
+// Import express.js
+const express = require("express");
+
+// Create express app
+var app = express();
+
+// Add static files location
+app.use(express.static("static"));
+
+// Get the functions in the db.js file to use
+const db = require('./services/db');
+
+app.get("/", function(req, res) {
+        res.send("Welcome");
+})
+
+// Country report, country name link shows its population when clicked
+app.get("/country-report", function(req, res) {
+    var sql ='select * from country';
+    var output ='<table border="1px">';
+    db.query(sql).then(results => {
+        for(var row of results) {
+            output += '<tr>';
+            output += '<td>' + row.Code + '</td>';
+            output += '<td>' + '<a href="./country-population/' + row.Population + '">' + row.Name + '</a>' + '</td>';
+            output += '<td>' + row.Continent + '</td>';
+            output += '<td>' + row.Region + '</td>';
+            output += '<td>' + row.Population + '</td>';
+            output += '<td>' + row.Capital + '</td>';
+            output += '</tr>';
+        }
+        output+= '</table>';
+        res.send(output);
+    });
+});
+
+// City report showing Id, name, countrycode, district & population
+app.get("/city-report", function(req, res) {
+    var sql = 'select * from city';
+    var output ='<table border="1px">';
+    db.query(sql).then(results => {
+        for(var row of results) {
+            output += '<tr>';
+            output += '<td>' + row.Id + '</td>';
+            output += '<td>' + row.Name + '</td>';
+            output += '<td>' + row.CountryCode + '</td>';
+            output += '<td>' + row.District + '</td>';
+            output += '<td>' + row.Population + '</td>';
+            output += '</tr>';
+        }
+        output+= '</table>';
+        res.send(output);
+    });
+})
+
+// Country language showing Countrycode, language, is official & percentage
+app.get("/countrylanguage", function(req, res) {
+    var sql = 'select * from countrylanguage';
+    var output ='<table border="1px">';
+    db.query(sql).then(results => {
+        for(var row of results) {
+            output += '<tr>';
+            output += '<td>' + row.CountryCode + '</td>';
+            output += '<td>' + row.Language + '</td>';
+            output += '<td>' + row.IsOfficial + '</td>';
+            output += '<td>' + row.Percentage + '</td>';
+            output += '</tr>';
+        }
+        output+= '</table>';
+        res.send(output);
+    });
+})
+
+// dynamic function
+app.get("/welcome/:user", function(req, res) {
+    console.log(req.params);
+    res.send("Welcome " + req.params.user);
+});
+
+// Start server on port 3000
+app.listen(3000,function(){
+    console.log(`Server running at http://127.0.0.1:3000/`);
+});
