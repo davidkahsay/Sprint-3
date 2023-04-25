@@ -1,0 +1,12 @@
+extends layout 
+
+block head 
+    link(rel="stylesheet", href="/style.css")
+
+block content 
+    h2 Gallery 
+    .gallery 
+        each idx in Array.from(Array(25).keys())
+            img.gallery-img(src=`https://3.bp.blogspot.com/-EAV8woA9wCk/TVV4Vd2AWII/AAAAAAAAAz8/DDnLno6zQeU/s1600/planet-earth-clear-photo-showing-the-land-area-and-the-water-area.jpg${idx}`, alt="")
+            img.gallery.height = "7px";
+            img.gallery.width = "7px";

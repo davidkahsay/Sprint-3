@@ -1,0 +1,49 @@
+.layout
+      .layout-nav
+        include mixins/nav
+        +navigation()
+block head
+  link(rel="stylesheet", href="/login.css")
+  
+  block content
+  | Login in to see student or staff dashboard
+     
+  
+  body
+    
+    form
+      div.label Student login 
+      div.username
+      input(type="text" placeholder="email")
+      div.password
+      input(type="password" placeholder="password")
+      div.checkbox
+      input(type='checkbox' name='agreement' checked)
+      |Remember details
+      <a href="/studentdash">
+         button(type="button") login 
+      </a>
+      
+    
+      
+  
+
+  form
+    div.label Staff login 
+    div.username
+    input(type="text" placeholder="email")
+    div.password
+    input(type="password" placeholder="password")
+    div.checkbox
+    input(type='checkbox' name='agreement' checked)
+    |Remember details
+   
+    <a href="/staffdash">
+      button(type="button") login 
+    </a>
+    
+  p
+      
+      | Not signed up?
+      a(href="/signup") Sign up here
+  

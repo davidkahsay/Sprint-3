@@ -1,0 +1,27 @@
+extends layout.pug
+
+block head
+  link(rel="stylesheet", href="/cities.css")
+  
+block content
+  head
+    title Country Language
+  body
+    h1 All Country Language
+    table
+      thead
+        tr
+          th Country Code
+          th Language
+          th Official
+          th Percentage
+      tbody
+        each language in languages
+          tr
+            td= language.CountryCode
+            td= language.Language
+            td= language.IsOfficial
+            td= language.Percentage
+    p. 
+        Showing #{languages.length} language(s).
+          

@@ -1,0 +1,46 @@
+extends layout.pug
+
+block head
+  link(rel="stylesheet", href="/cities.css")
+  
+block content
+  head
+    title Countries
+  body
+    h1 All Countries
+    table
+      thead
+        tr
+          th Code
+          th Name
+          th Continent
+          th Region
+          th Surface Area
+          th Independence Year
+          th Population
+          th Life Expectancy
+          th GNP
+          th GNP Old
+          th Local Name
+          th Government Form
+          th Head of State
+          th Capital
+          th Code 2
+      tbody
+        each country in countries
+          tr
+            td= country.Code
+            td= country.Name
+            td= country.Continent
+            td= country.Region
+            td= country.SurfaceArea
+            td= country.IndepYear
+            td= country.Population
+            td= country.LifeExpectancy
+            td= country.GNP
+            td= country.GNPOld
+            td= country.LocalName
+            td= country.GovernmentForm
+            td= country.HeadOfState
+            td= country.Capital
+            td= country.Code2

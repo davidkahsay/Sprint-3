@@ -1,11 +1,13 @@
 /* Import dependencies */
 import express from "express";
 import mysql from "mysql2/promise";
-
+import bcrypt from "bcryptjs";
+import DatabaseService from "./services/database.service.mjs";
+import session from "express-session";
 /* Create express instance */
+
 const app = express();
 const port = 3000;
-
 
 app.set("view engine", "pug");
 
@@ -95,6 +97,100 @@ app.post("/cities/add", (req, res) => {
     console.log(`Added city`);
     return res.send("Your entry has been added");
   });
+});
+
+
+// staffdash route
+app.get("/staffdash", (req, res) => {
+  res.render("staffdash");
+});
+
+// dash route
+app.get("/studentdash", (req, res) => {
+  res.render("studentdash");
+});
+//teacherviewreport route
+app.get("/teacherviewreport", (req, res) => {
+  res.render("teacherviewreport");
+});
+// viewquiz route
+app.get("/viewquiz", (req, res) => {
+  res.render("viewquiz");
+});
+
+//assignquiz route
+app.get("/assignquiz", (req, res) => {
+  res.render("assignquiz");
+});
+// gradequiz route
+app.get("/gradequiz", (req, res) => {
+  res.render("gradequiz");
+});
+// dynamic function
+app.get("/welcome/:user", function(req, res) {
+  console.log(req.params);
+  res.send("Welcome " + req.params.user);
+});
+//contactstudents route
+app.get("/contactstudents", (req, res) => {
+  res.render("contactstudents");
+});
+
+// this will return an array of countries from the database
+app.get("/countries", async (req, res) => {
+  const [rows, fields] = await db.execute("SELECT * FROM `country`");
+  return res.render("countries", { countries: rows });
+});
+
+// this will return a specific country from the database
+app.get("/countries/:code", async (req, res) => {
+  const countryCode = req.params.code;
+  const [rows, fields] = await db.execute("SELECT * FROM `country` WHERE `Code` = ?", [countryCode]);
+  if (rows.length === 0) {
+    return res.status(404).send("Country not found");
+  }
+  return res.render("country", { country: rows[0] });
+});
+
+// this adds a new country to the database
+app.post("/countries", async (req, res) => {
+  const { code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2 } = req.body;
+  const query = "INSERT INTO `country` (`Code`, `Name`, `Continent`, `Region`, `SurfaceArea`, `IndepYear`, `Population`, `LifeExpectancy`, `GNP`, `GNPOld`, `LocalName`, `GovernmentForm`, `HeadOfState`, `Capital`, `Code2`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  
+  await db.execute(query, [code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2]);
+  console.log(`Added country with code: ${code}`);
+  return res.redirect("/countries");
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Returns an array of countries from the database
+app.get("/countrylanguage", async (req, res) => {
+  const [rows, fields] = await db.execute("SELECT * FROM `countrylanguage`");
+  return res.render("countrylanguage", { countrylanguage: rows });
+});
+
+// Returns a specific country from the database
+app.get("/countrylanguage/:code", async (req, res) => {
+  const countryCode = req.params.code;
+  const [rows, fields] = await db.execute("SELECT * FROM `countrylanguage` WHERE `Code` = ?", [countryCode]);
+  if (rows.length === 0) {
+    return res.status(404).send("Country not found");
+  }
+  return res.render("countrylanguage", { countrylanguage: rows[0] });
+});
+
+// Adds a new country to the database
+app.post("/countrylanguage", async (req, res) => {
+  const { countrycode, language, isoffical, Percentage } = req.body;
+  const query = "INSERT INTO `countrylanguage` ('countrycode', 'language', 'isoffical', 'Percentage') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  try {
+    await db.execute(query, [countrycode, language, isoffical, Percentage]);
+    console.log(`Added country with code: ${code}`);
+    return res.redirect("/countrylanguage");
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("This entry was not able to be added");
+  }
 });
 
 // Run server!
