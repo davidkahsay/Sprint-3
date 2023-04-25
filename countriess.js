@@ -18,12 +18,8 @@ app.get("/countries/:code", async (req, res) => {
 app.post("/countries", async (req, res) => {
   const { code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2 } = req.body;
   const query = "INSERT INTO `country` (`Code`, `Name`, `Continent`, `Region`, `SurfaceArea`, `IndepYear`, `Population`, `LifeExpectancy`, `GNP`, `GNPOld`, `LocalName`, `GovernmentForm`, `HeadOfState`, `Capital`, `Code2`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-  try {
-    await db.execute(query, [code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2]);
-    console.log(`Added country with code: ${code}`);
-    return res.redirect("/countries");
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("This entry was not able to be added");
-  }
+  
+  await db.execute(query, [code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2]);
+  console.log(`Added country with code: ${code}`);
+  return res.redirect("/countries");
 });
