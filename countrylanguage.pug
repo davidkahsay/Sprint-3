@@ -1,27 +1,14 @@
-extends layout.pug
+extends layout
 
-block head
-  link(rel="stylesheet", href="/cities.css")
-  
 block content
-  head
-    title Country Language
-  body
-    h1 All Country Language
-    table
-      thead
-        tr
-          th Country Code
-          th Language
-          th Official
-          th Percentage
-      tbody
-        each language in languages
-          tr
-            td= language.CountryCode
-            td= language.Language
-            td= language.IsOfficial
-            td= language.Percentage
-    p. 
-        Showing #{languages.length} language(s).
-          
+  h1= `Languages Spoken in ${countryLanguage[0].CountryCode}`
+  table
+    tr
+      th Language
+      th Is Official
+      th Percentage
+    each lang in countryLanguage
+      tr
+        td= lang.Language
+        td= lang.IsOfficial
+        td= lang.Percentage
