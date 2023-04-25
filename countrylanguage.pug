@@ -1,7 +1,9 @@
-extends layout
+extends layout.pug
+block head
+  link(rel="stylesheet", href="/cities.css")
 
 block content
-  h1= `Languages Spoken in ${countryLanguage[0].CountryCode}`
+  h1 Country Languages
   table
     tr
       th Language
