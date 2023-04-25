@@ -1,10 +1,10 @@
-// Returns an array of countries from the database
+// this will return an array of countries from the database
 app.get("/countries", async (req, res) => {
   const [rows, fields] = await db.execute("SELECT * FROM `country`");
   return res.render("countries", { countries: rows });
 });
 
-// Returns a specific country from the database
+// this will return a specific country from the database
 app.get("/countries/:code", async (req, res) => {
   const countryCode = req.params.code;
   const [rows, fields] = await db.execute("SELECT * FROM `country` WHERE `Code` = ?", [countryCode]);
@@ -14,7 +14,7 @@ app.get("/countries/:code", async (req, res) => {
   return res.render("country", { country: rows[0] });
 });
 
-// Adds a new country to the database
+// this adds a new country to the database
 app.post("/countries", async (req, res) => {
   const { code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2 } = req.body;
   const query = "INSERT INTO `country` (`Code`, `Name`, `Continent`, `Region`, `SurfaceArea`, `IndepYear`, `Population`, `LifeExpectancy`, `GNP`, `GNPOld`, `LocalName`, `GovernmentForm`, `HeadOfState`, `Capital`, `Code2`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
