@@ -1,26 +1,29 @@
-app.get('/countrylanguage', async (req, res) => {
-  try {
-    const [rows, fields] = await db.execute('SELECT * FROM `countrylanguage`');
-    res.render('countrylanguage', { rows });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('An error occurred while fetching the data');
-  }
+// Returns an array of languages spoken in countries from the database
+app.get("/languages", async (req, res) => {
+  const [rows, fields] = await db.execute("SELECT * FROM `countrylanguage`");
+  return res.render("languages", { languages: rows });
 });
 
-// GET a specific country language by country code and language
-app.get('/countrylanguage/:countryCode/:language', async (req, res) => {
+// Returns the languages spoken in a specific country from the database
+app.get("/languages/:code", async (req, res) => {
+  const countryCode = req.params.code;
+  const [rows, fields] = await db.execute("SELECT * FROM `countrylanguage` WHERE `CountryCode` = ?", [countryCode]);
+  if (rows.length === 0) {
+    return res.status(404).send("Country language not found");
+  }
+  return res.render("countryLanguage", { countryLanguage: rows });
+});
+
+// Adds a new country language to the database
+app.post("/languages", async (req, res) => {
+  const { countryCode, language, isOfficial, percentage } = req.body;
+  const query = "INSERT INTO `countrylanguage` (`CountryCode`, `Language`, `IsOfficial`, `Percentage`) VALUES (?, ?, ?, ?)";
   try {
-    const countryCode = req.params.countryCode;
-    const language = req.params.language;
-    const [rows, fields] = await db.execute('SELECT * FROM `countrylanguage` WHERE `CountryCode` = ? AND `Language` = ?', [countryCode, language]);
-    if (rows.length === 0) {
-      return res.status(404).send('No country language found with the specified code and language');
-    }
-    const countryLanguage = rows[0];
-    res.render('countrylanguage_details', { countryLanguage });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('An error occurred while fetching the data');
+    await db.execute(query, [countryCode, language, isOfficial, percentage]);
+    console.log(`Added language spoken in country with code: ${countryCode}`);
+    return res.redirect("/languages");
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("This entry was not able to be added");
   }
 });
