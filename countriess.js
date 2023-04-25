@@ -1,31 +1,42 @@
-// Returns an array of countries from the database
-app.get("/countries", async (req, res) => {
-  const [rows, fields] = await db.execute("SELECT * FROM `country`");
-  return res.render("countries", { rows, fields });
+// Get all countries
+app.get('/countries', async (req, res) => {
+  try {
+    const [rows] = await connection.execute('SELECT * FROM country');
+    return res.send(rows);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Error retrieving countries from database');
+  }
 });
 
-app.get('/countries/:id', async (req, res) => {
-  const countryId = req.params.id;
-  const country = await db.getCountry(countryId);
-  return res.render('country', { country });
-})
-
-// Returns JSON array of countries
-app.get("/api/countries", async (req, res) => {
-  const [rows, fields] = await db.getCountries();
-  return res.send(rows);
-});
-
-// Adds a new country to the database
-app.post("/countries/add", (req, res) => {
-  const { name, language } = req.body;
-  const query = "INSERT INTO `country` (`Name`, `Language`) VALUES (?, ?)";
-  db.execute(query, [name, language], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("This entry was not able to be added");
+// Get a specific country by code
+app.get('/countries/:code', async (req, res) => {
+  const countryCode = req.params.code;
+  try {
+    const [rows] = await connection.execute('SELECT * FROM country WHERE Code = ?', [countryCode]);
+    if (rows.length === 0) {
+      return res.status(404).send('Country not found');
     }
-    console.log(`Added country`);
-    return res.send("Your entry has been added");
-  });
+    return res.send(rows[0]);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Error retrieving country from database');
+  }
+});
+
+// Add a new country
+app.post('/countries', async (req, res) => {
+  const { Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 } = req.body;
+  try {
+    const [result] = await connection.execute('INSERT INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2]);
+    console.log(`Added country ${Code}`);
+    return res.send(`Country ${Code} has been added`);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Error adding country to database');
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
 });
