@@ -1,5 +1,4 @@
 extends layout.pug
-
 block content  
 
     h2 Student Dashboard
@@ -10,19 +9,11 @@ block content
 
  
 
-    <a href="/cities">
-
+    <a href="/teacherviewreport">
       button(type="button") View reports
-
     </a>
 
    
-
-    <a href="/savedreports">
-
-      button(type="button") Saved Reports
-
-    </a>
 
  
 
@@ -42,7 +33,7 @@ block content
 
  
 
-    <a href="/studentfdash">
+    <a href="/studentdash">
 
       button(type="button") Contact teachers
 
@@ -50,9 +41,11 @@ block content
 
  
 
-    <a href="/studentdash">
-
+    <a href="/">
       button(type="button") Log out
-
     </a>
+    .gallery 
+      each idx in Array.from(Array(1).keys())
+        img.gallery-img(src=`https://2.bp.blogspot.com/-dbMn8RMnag8/VqFbWeYXPyI/AAAAAAAAASs/jL9IN_4o6y4/s1600/1.jpg${idx}`, alt="")
+
 
